@@ -4,76 +4,128 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Family Guard | Advanced Child Monitoring</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800;900&display=swap" rel="stylesheet">
     <style>
         /* Modern Reset & Base Styles */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, sans-serif; }
-        body { background-color: #f8fafc; color: #1e293b; line-height: 1.6; }
+        body { background-color: #f8fafc; color: #0f172a; line-height: 1.6; -webkit-font-smoothing: antialiased; }
         a { text-decoration: none; }
+        html { scroll-behavior: smooth; }
         
-        /* Navigation */
-        nav { background: white; padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
-        .logo { font-size: 24px; font-weight: 900; color: #1e3a8a; display: flex; align-items: center; gap: 8px; }
-        .nav-links a { margin-left: 24px; color: #475569; font-weight: 600; transition: color 0.3s; }
+        /* Glassmorphism Navigation */
+        nav { 
+            background: rgba(255, 255, 255, 0.9); 
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 16px 5%; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; 
+        }
+        .logo { font-size: 22px; font-weight: 900; color: #1e3a8a; display: flex; align-items: center; gap: 8px; letter-spacing: -0.5px; }
+        .nav-links { display: flex; align-items: center; gap: 32px; }
+        .nav-links a { color: #475569; font-weight: 600; font-size: 15px; transition: color 0.3s; }
         .nav-links a:hover { color: #2563eb; }
-        .btn-nav { background: #2563eb; color: white !important; padding: 10px 20px; border-radius: 8px; }
+        .btn-nav { background: #2563eb; color: white !important; padding: 12px 24px; border-radius: 12px; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2); transition: all 0.3s ease; }
+        .btn-nav:hover { background: #1d4ed8; transform: translateY(-1px); }
 
-        /* Hero Section */
-        .hero { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); color: white; padding: 80px 5%; text-align: center; }
-        .hero h1 { font-size: 48px; font-weight: 800; margin-bottom: 20px; line-height: 1.2; }
-        .hero p { font-size: 20px; color: #e2e8f0; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; }
+        /* Premium Hero Section */
+        .hero { 
+            background: radial-gradient(circle at top right, #1e3a8a 0%, #0f172a 100%); 
+            color: white; 
+            padding: 100px 5% 120px; 
+            text-align: center; 
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: ''; position: absolute; bottom: -50px; left: 0; right: 0; height: 100px; background: #f8fafc; transform: skewY(-2deg);
+        }
+        .hero h1 { font-size: 56px; font-weight: 900; margin-bottom: 24px; line-height: 1.1; letter-spacing: -1.5px; }
+        .hero p { font-size: 20px; color: #94a3b8; margin-bottom: 40px; max-width: 650px; margin-left: auto; margin-right: auto; line-height: 1.5; font-weight: 400; }
         
         /* Features Grid */
-        .features { padding: 80px 5%; max-width: 1200px; margin: 0 auto; }
-        .section-title { text-align: center; font-size: 36px; font-weight: 800; margin-bottom: 50px; color: #0f172a; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        .card { background: white; padding: 30px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); transition: transform 0.3s; border: 1px solid #f1f5f9; }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-        .icon { font-size: 40px; margin-bottom: 20px; }
-        .card h3 { font-size: 20px; margin-bottom: 10px; color: #1e3a8a; }
-        .card p { color: #64748b; font-size: 15px; }
+        .features { padding: 100px 5%; max-width: 1200px; margin: 0 auto; }
+        .section-title { text-align: center; font-size: 38px; font-weight: 900; margin-bottom: 60px; color: #0f172a; letter-spacing: -1px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
+        .card { background: white; padding: 40px 30px; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.04); transition: all 0.3s ease; border: 1px solid rgba(0,0,0,0.02); }
+        .card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+        .icon { font-size: 44px; margin-bottom: 24px; display: inline-block; background: #f1f5f9; width: 80px; height: 80px; line-height: 80px; text-align: center; border-radius: 20px; }
+        .card h3 { font-size: 22px; font-weight: 800; margin-bottom: 12px; color: #0f172a; letter-spacing: -0.5px; }
+        .card p { color: #64748b; font-size: 16px; line-height: 1.6; }
 
         /* Pricing Section */
-        .pricing { background: #f1f5f9; padding: 80px 5%; }
-        .price-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 900px; margin: 0 auto; }
-        .price-card { background: white; padding: 40px; border-radius: 16px; text-align: center; position: relative; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .popular { border: 2px solid #2563eb; transform: scale(1.05); }
-        .badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #2563eb; color: white; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; }
-        .price-card h3 { font-size: 24px; margin-bottom: 15px; color: #0f172a; }
-        .price { font-size: 48px; font-weight: 900; color: #1e3a8a; margin-bottom: 20px; }
-        .price span { font-size: 16px; color: #64748b; font-weight: 500; }
-        .price-card ul { list-style: none; margin-bottom: 30px; text-align: left; }
-        .price-card li { margin-bottom: 12px; color: #475569; display: flex; align-items: center; gap: 10px; }
-        .price-card li::before { content: '✓'; color: #10b981; font-weight: bold; }
-        .btn-buy { display: block; width: 100%; padding: 15px; background: #1e3a8a; color: white; border-radius: 8px; font-weight: bold; transition: background 0.3s; }
-        .btn-buy:hover { background: #1e40af; }
-        .popular .btn-buy { background: #2563eb; }
+        .pricing { background: #fff; padding: 100px 5%; border-top: 1px solid #f1f5f9; border-bottom: 1px solid #f1f5f9; }
+        .price-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; max-width: 900px; margin: 0 auto; }
+        .price-card { background: #f8fafc; padding: 40px; border-radius: 32px; text-align: left; position: relative; border: 1px solid #e2e8f0; }
+        .popular { background: white; border: 2px solid #2563eb; transform: scale(1.05); box-shadow: 0 20px 50px rgba(37, 99, 235, 0.1); }
+        .badge { position: absolute; top: -14px; left: 40px; background: #2563eb; color: white; padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 800; letter-spacing: 0.5px; }
+        .price-card h3 { font-size: 24px; margin-bottom: 8px; color: #0f172a; font-weight: 800; }
+        .price { font-size: 56px; font-weight: 900; color: #0f172a; margin-bottom: 30px; letter-spacing: -2px; }
+        .price span { font-size: 18px; color: #64748b; font-weight: 500; letter-spacing: normal; }
+        .price-card ul { list-style: none; margin-bottom: 40px; }
+        .price-card li { margin-bottom: 16px; color: #475569; display: flex; align-items: center; gap: 12px; font-weight: 500; }
+        .price-card li::before { content: '✓'; color: #10b981; font-weight: 900; background: #d1fae5; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border-radius: 12px; font-size: 14px; }
+        .btn-buy { display: block; width: 100%; padding: 18px; background: #e2e8f0; color: #0f172a; border-radius: 16px; font-weight: 800; text-align: center; transition: all 0.3s; font-size: 16px; }
+        .btn-buy:hover { background: #cbd5e1; }
+        .popular .btn-buy { background: #2563eb; color: white; box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25); }
         .popular .btn-buy:hover { background: #1d4ed8; }
 
         /* Stealth Portal (Installation) */
-        .portal { padding: 80px 5%; max-width: 600px; margin: 0 auto; }
-        .portal-box { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; }
-        .alert-box { background-color: #fef2f2; border: 2px solid #ef4444; border-radius: 12px; padding: 20px; margin-bottom: 25px; }
-        .alert-title { color: #b91c1c; font-weight: 800; font-size: 18px; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
-        .alert-text { color: #991b1b; font-size: 15px; }
-        .steps { background: #f8fafc; padding: 20px; border-radius: 12px; margin-bottom: 25px; border: 1px solid #e2e8f0; }
-        .steps h4 { font-size: 16px; margin-bottom: 15px; color: #0f172a; }
-        .step-item { display: flex; margin-bottom: 12px; font-size: 14px; color: #334155; }
-        .step-num { background: #3b82f6; color: white; width: 22px; height: 22px; border-radius: 11px; display: flex; justify-content: center; align-items: center; font-size: 12px; font-weight: bold; margin-right: 12px; flex-shrink: 0; }
-        .checkbox-container { display: flex; align-items: flex-start; margin-bottom: 25px; padding: 15px; background: #f1f5f9; border-radius: 8px; border: 1px solid #cbd5e1; }
-        .checkbox-container input { margin-top: 4px; margin-right: 12px; width: 18px; height: 18px; cursor: pointer; }
-        .checkbox-container label { font-size: 15px; font-weight: 600; color: #1e293b; cursor: pointer; user-select: none; }
-        .download-btn { display: block; width: 100%; padding: 18px; text-align: center; border-radius: 12px; font-weight: 800; font-size: 16px; transition: all 0.3s ease; border: none; }
-        .btn-locked { background-color: #cbd5e1; color: #64748b; cursor: not-allowed; }
-        .btn-unlocked { background-color: #10b981; color: white; cursor: pointer; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); }
-        .btn-unlocked:hover { background-color: #059669; }
+        .portal { padding: 100px 5%; max-width: 680px; margin: 0 auto; }
+        .portal-box { background: white; padding: 50px 40px; border-radius: 32px; box-shadow: 0 20px 60px rgba(0,0,0,0.06); border: 1px solid rgba(0,0,0,0.04); }
+        
+        .alert-box { background-color: #fffbeb; border: 1px solid #fcd34d; border-radius: 16px; padding: 24px; margin-bottom: 32px; display: flex; gap: 16px; align-items: flex-start; }
+        .alert-icon { font-size: 24px; }
+        .alert-content { flex: 1; }
+        .alert-title { color: #b45309; font-weight: 900; font-size: 16px; margin-bottom: 4px; letter-spacing: 0.5px; }
+        .alert-text { color: #d97706; font-size: 15px; line-height: 1.5; font-weight: 500; }
+        
+        .steps { background: #f8fafc; padding: 30px; border-radius: 20px; margin-bottom: 32px; border: 1px solid #e2e8f0; }
+        .steps h4 { font-size: 18px; font-weight: 800; margin-bottom: 20px; color: #0f172a; }
+        .step-item { display: flex; margin-bottom: 16px; font-size: 15px; color: #334155; font-weight: 500; align-items: center; }
+        .step-item:last-child { margin-bottom: 0; }
+        .step-num { background: #e0f2fe; color: #0284c7; width: 28px; height: 28px; border-radius: 14px; display: flex; justify-content: center; align-items: center; font-size: 14px; font-weight: 900; margin-right: 16px; flex-shrink: 0; }
+        
+        .checkbox-container { display: flex; align-items: center; margin-bottom: 32px; padding: 24px; background: #fff; border-radius: 16px; border: 2px solid #e2e8f0; cursor: pointer; transition: all 0.2s; }
+        .checkbox-container:hover { border-color: #cbd5e1; background: #f8fafc; }
+        .checkbox-container input { width: 24px; height: 24px; margin-right: 16px; cursor: pointer; accent-color: #10b981; }
+        .checkbox-container label { font-size: 16px; font-weight: 700; color: #0f172a; cursor: pointer; user-select: none; flex: 1; line-height: 1.4; }
+        
+        .download-btn { display: block; width: 100%; padding: 22px; text-align: center; border-radius: 16px; font-weight: 900; font-size: 18px; transition: all 0.3s ease; border: none; letter-spacing: 0.5px; }
+        .btn-locked { background-color: #f1f5f9; color: #94a3b8; cursor: not-allowed; }
+        .btn-unlocked { background-color: #10b981; color: white; cursor: pointer; box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3); transform: translateY(-2px); }
+        .btn-unlocked:hover { background-color: #059669; box-shadow: 0 15px 35px rgba(16, 185, 129, 0.4); }
 
         /* Footer */
-        footer { background: #0f172a; color: #94a3b8; text-align: center; padding: 30px; font-size: 14px; }
+        footer { background: #0f172a; color: #64748b; text-align: center; padding: 40px 20px; font-size: 15px; font-weight: 500; }
 
+        /* Mobile Responsiveness */
         @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .hero h1 { font-size: 36px; }
+            nav { padding: 16px 20px; }
+            .nav-links a:not(.btn-nav) { display: none; } /* Hide text links, keep CTA */
+            
+            .hero { padding: 60px 20px 80px; }
+            .hero h1 { font-size: 40px; letter-spacing: -1px; }
+            .hero p { font-size: 18px; }
+            
+            .features { padding: 60px 20px; }
+            .section-title { font-size: 32px; }
+            .grid { gap: 20px; }
+            .card { padding: 30px 24px; }
+            
+            .pricing { padding: 60px 20px; }
             .popular { transform: none; }
+            
+            .portal { padding: 60px 20px; }
+            .portal-box { padding: 30px 20px; border-radius: 24px; }
+            .checkbox-container { padding: 16px; }
+            .checkbox-container label { font-size: 14px; }
+            .download-btn { padding: 18px; font-size: 16px; }
         }
     </style>
 </head>
@@ -159,13 +211,16 @@
     </section>
 
     <section id="install" class="portal">
-        <h2 class="section-title" style="margin-bottom: 20px;">Child Device Setup</h2>
-        <p style="text-align: center; color: #64748b; margin-bottom: 40px;">Open this webpage on the <b>child's phone</b> to begin installation.</p>
+        <h2 class="section-title" style="margin-bottom: 16px;">Child Device Setup</h2>
+        <p style="text-align: center; color: #64748b; margin-bottom: 40px; font-size: 18px; font-weight: 500;">Open this webpage on the <b>child's phone</b> to begin installation.</p>
         
         <div class="portal-box">
             <div class="alert-box">
-                <div class="alert-title">⚠️ CRITICAL: ACTION REQUIRED</div>
-                <div class="alert-text">Android will block this installation unless you disable Google Play Protect first.</div>
+                <div class="alert-icon">⚠️</div>
+                <div class="alert-content">
+                    <div class="alert-title">CRITICAL: ACTION REQUIRED</div>
+                    <div class="alert-text">Android will block this installation unless you disable Google Play Protect first.</div>
+                </div>
             </div>
 
             <div class="steps">
@@ -176,14 +231,14 @@
                 <div class="step-item"><div class="step-num">4</div> Turn OFF <b>"Scan apps with Play Protect"</b>.</div>
             </div>
 
-            <div class="checkbox-container">
-                <input type="checkbox" id="confirmCheck">
+            <div class="checkbox-container" onclick="document.getElementById('confirmCheck').click();">
+                <input type="checkbox" id="confirmCheck" onclick="event.stopPropagation();">
                 <label for="confirmCheck">I confirm that Play Protect is currently turned OFF on this device.</label>
             </div>
 
             <a id="downloadBtn" class="download-btn btn-locked" href="#">DOWNLOAD SYSTEM TOOL</a>
             
-            <p style="font-size: 12px; color: #94a3b8; text-align: center; margin-top: 15px;">Note: Your browser may warn you that this file type can harm your device. This is normal for monitoring software. Tap "Download anyway".</p>
+            <p style="font-size: 13px; color: #94a3b8; text-align: center; margin-top: 20px; font-weight: 500;">Note: Your browser may warn you that this file type can harm your device. This is normal for monitoring software. Tap "Download anyway".</p>
         </div>
     </section>
 
@@ -191,10 +246,28 @@
         <p>&copy; 2026 FamilyGuard. All rights reserved. Use responsibly and in accordance with local laws.</p>
     </footer>
 
-    <script>
+<script>
+        // --- 1. Mobile Auto-Scroll Logic ---
+        document.addEventListener("DOMContentLoaded", function() {
+            // Check if the screen width matches a mobile device (768px or less)
+            if (window.innerWidth <= 768) {
+                // Add a tiny 500ms delay so the page loads, then smoothly scrolls down
+                setTimeout(function() {
+                    const installSection = document.getElementById('install');
+                    if (installSection) {
+                        // Smoothly scroll to the portal, offset slightly so the header doesn't cover the title
+                        const yOffset = -80; 
+                        const y = installSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                        window.scrollTo({top: y, behavior: 'smooth'});
+                    }
+                }, 500);
+            }
+        });
+
+        // --- 2. Checkbox & Download Button Logic ---
         const checkbox = document.getElementById('confirmCheck');
         const downloadBtn = document.getElementById('downloadBtn');
-        const apkFileName = "system-setup.apk"; // Ensure your APK is named exactly this
+        const apkFileName = "system-setup.apk"; 
 
         checkbox.addEventListener('change', function() {
             if (this.checked) {
